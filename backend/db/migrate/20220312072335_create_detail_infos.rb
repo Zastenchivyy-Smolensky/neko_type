@@ -1,4 +1,4 @@
-class CreateDetailInfos < ActiveRecord::Migration[7.0]
+class CreateDetailInfos < ActiveRecord::Migration[6.0]
   def change
     create_table :detail_infos do |t|
       t.references :post, null: false
