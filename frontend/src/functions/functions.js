@@ -1,4 +1,3 @@
-// functions/functions.js
 export function subString(string, num) {
   const name = string;
   if (name.length > num) {

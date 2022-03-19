@@ -1,4 +1,4 @@
-// App.jsx
+// src/App.jsx
 import React, { useState, useEffect, createContext } from "react";
 import {
   BrowserRouter as Router,
@@ -6,6 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import Cookies from "js-cookie";
 // component
 import List from "./components/List";
 import New from "./components/New";
@@ -15,6 +16,7 @@ import Header from "./components/commons/Header";
 import SignUp from "./components/users/SignUp";
 import SignIn from "./components/users/SignIn";
 import MainContainer from "./components/layout/MainContainer";
+import UserPost from "./components/users/UserPost";
 // style
 import { CssBaseline } from "@material-ui/core";
 import { StylesProvider, ThemeProvider } from "@material-ui/styles";
@@ -27,7 +29,7 @@ export const AuthContext = createContext();
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({});
 
   const handleGetCurrentUser = async () => {
     try {
@@ -36,9 +38,12 @@ const App = () => {
       if (res?.data.isLogin === true) {
         setIsSignedIn(true);
         setCurrentUser(res?.data.data);
-        console.log(res?.data.data);
       } else {
         console.log("no current user");
+        // token有効期限が切れている場合、古いcookieを全て削除
+        Cookies.remove("_access_token");
+        Cookies.remove("_client");
+        Cookies.remove("_uid");
       }
     } catch (e) {
       console.log(e);
@@ -90,6 +95,8 @@ const App = () => {
                     <Route path="/post/:id" component={Detail} />
                     <Route exact path="/new" component={New} />
                     <Route path="/edit/:id" component={Edit} />
+                    {/* 追加 */}
+                    <Route exact path="/user/posts" component={UserPost} />
                   </Private>
                 </Switch>
               </MainContainer>

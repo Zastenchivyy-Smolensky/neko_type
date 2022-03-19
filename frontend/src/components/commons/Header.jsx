@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) =>
 const drawerItem = [
   { label: "一覧へ戻る", path: "/" },
   { label: "新規作成", path: "/new" },
-  { label: "自分の投稿", path: "#" },
+  { label: "自分の投稿", path: "/user/posts" },
 ];
 
 const Header = () => {
