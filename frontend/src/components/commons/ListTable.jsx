@@ -1,4 +1,7 @@
+// /src/components/commons/ListTable.jsx
 import React from "react";
+import { Link } from "react-router-dom";
+// style
 import {
   Button,
   TableContainer,
@@ -8,9 +11,9 @@ import {
   TableRow,
   TableHead,
   Paper,
-  Link,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// functions
 import { subString } from "../../functions/functions";
 
 const useStyles = makeStyles({
@@ -22,9 +25,10 @@ const useStyles = makeStyles({
   },
 });
 
-function ListTable(props) {
+const ListTable = (props) => {
   const classes = useStyles();
   const { dataList, handleDelete, currentUser } = props;
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -32,6 +36,9 @@ function ListTable(props) {
           <TableRow>
             <TableCell align="center" className={classes.fontWeight}>
               名前
+            </TableCell>
+            <TableCell align="center" className={classes.fontWeight}>
+              猫種
             </TableCell>
             <TableCell align="center" className={classes.fontWeight}>
               好きな食べ物
@@ -55,12 +62,12 @@ function ListTable(props) {
                 {subString(item.detailInfo.favoriteFood, 10)}
               </TableCell>
               <TableCell align="center">
-                {subString(item.detailInfo.favoritetoy, 10)}
+                {subString(item.detailInfo.favoriteToy, 10)}
               </TableCell>
               {currentUser.id === item.userId ? (
-                <tableCell align="center">
+                <TableCell align="center">
                   <Link to={`/edit/${item.id}`}>更新</Link>
-                </tableCell>
+                </TableCell>
               ) : (
                 <TableCell align="center"></TableCell>
               )}
@@ -86,6 +93,5 @@ function ListTable(props) {
       </Table>
     </TableContainer>
   );
-}
-
+};
 export default ListTable;

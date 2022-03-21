@@ -32,7 +32,7 @@ const Form = (props) => {
         戻る
       </Button>
       <SpaceRow height={20} />
-      <form className={classes.root} novalidate autoComplete="off">
+      <form className={classes.root} noValidate autoComplete="off">
         <TextField
           type="text"
           label="猫の名前"
